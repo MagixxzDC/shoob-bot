@@ -1,0 +1,40 @@
+{
+  "warnings": {
+    "1213738639784280074": [
+      {
+        "userId": "328248785933434881",
+        "userTag": "magixxz#0",
+        "moderatorId": "473953707843649536",
+        "moderatorTag": "nub4life2099#0",
+        "reason": "woman",
+        "timestamp": "2026-04-10T01:50:48.383Z"
+      },
+      {
+        "userId": "328248785933434881",
+        "userTag": "magixxz#0",
+        "moderatorId": "328248785933434881",
+        "moderatorTag": "magixxz#0",
+        "reason": "being a nerd",
+        "timestamp": "2026-04-10T01:51:20.298Z"
+      },
+      {
+        "userId": "473953707843649536",
+        "userTag": "nub4life2099#0",
+        "moderatorId": "473953707843649536",
+        "moderatorTag": "nub4life2099#0",
+        "reason": "not being a nerd",
+        "timestamp": "2026-04-10T01:51:26.854Z"
+      }
+    ],
+    "757922359788175412": [
+      {
+        "userId": "328248785933434881",
+        "userTag": "magixxz",
+        "moderatorId": "console",
+        "moderatorTag": "TerminalUser",
+        "reason": "Cheese",
+        "timestamp": "2026-04-10T07:02:46.288Z"
+      }
+    ]
+  }
+}
