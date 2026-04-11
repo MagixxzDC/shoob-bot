@@ -23,17 +23,18 @@ module.exports = {
 
     const commandsByCategory = {
       moderation: [
-        'kick', 'ban', 'warn', 'purge', 'modlogs',
-        'softban', 'tempmute', 'warnings'
+        'ban', 'kick', 'modlogs', 'purge', 'softban',
+        'tempmute', 'warn', 'warnings'
       ],
       fun: [
-        '8ball', 'dice', 'flip', 'choose', 'nitro',
-        'roast', 'compliment', 'joke', 'meme',
-        'slap', 'hug', 'kiss', 'trivia'
+        '8ball', 'choose', 'compliment', 'dice', 'flip',
+        'hug', 'joke', 'kiss', 'nitro', 'roast',
+        'slap', 'trivia'
       ],
       utility: [
-        'userinfo', 'avatar', 'ping', 'send',
-        'channelinfo', 'serverinfo', 'roleinfo', 'snipe'
+        'avatar', 'calculator', 'channelinfo', 'ping',
+        'poll', 'roleinfo', 'send', 'serverinfo',
+        'snipe', 'userinfo', 'weather'
       ],
       admin: [
         'help', 'giverole', 'takerole'

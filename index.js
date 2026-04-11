@@ -117,36 +117,38 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-/* ---------------- READY + REGISTER SLASH ---------------- */
+/* ---------------- CLIENT READY ---------------- */
 
-client.once('ready', async () => {
+const shouldRegisterSlashOnReady = process.env.REGISTER_SLASH_ON_READY === 'true';
+
+client.once('clientReady', async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
-  const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+  if (shouldRegisterSlashOnReady) {
+    const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+    const appId = process.env.CLIENT_ID || client.user.id;
 
-  const appId = process.env.CLIENT_ID || client.user.id;
-  const globalSlashCommands = slashCommandsArray.map((command) => ({
-    ...command,
-    integration_types: [0, 1],
-    contexts: [0, 1, 2],
-  }));
+    try {
+      if (process.env.REGISTER_GUILD_COMMANDS === 'true' && process.env.GUILD_ID) {
+        await rest.put(
+          Routes.applicationGuildCommands(appId, process.env.GUILD_ID),
+          { body: slashCommandsArray }
+        );
+        console.log('Slash commands registered (guild).');
+      }
 
-  try {
-    if (process.env.GUILD_ID) {
       await rest.put(
-        Routes.applicationGuildCommands(appId, process.env.GUILD_ID),
+        Routes.applicationCommands(appId),
         { body: slashCommandsArray }
       );
-      console.log('Slash commands registered (guild).');
-    }
+      console.log('Slash commands registered (global).');
 
-    await rest.put(
-      Routes.applicationCommands(appId),
-      { body: globalSlashCommands }
-    );
-    console.log('Slash commands registered (global, DM/group chat enabled).');
-  } catch (err) {
-    console.error('Slash register error:', err);
+      if (process.env.REGISTER_GUILD_COMMANDS !== 'true' && process.env.GUILD_ID) {
+        console.log('Note: GUILD_ID set but REGISTER_GUILD_COMMANDS not true. Skipped guild registration to avoid duplicates.');
+      }
+    } catch (err) {
+      console.error('Slash register error:', err);
+    }
   }
 
   /* PREFIX CONSOLE TESTING */
