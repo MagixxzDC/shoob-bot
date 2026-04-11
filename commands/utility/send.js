@@ -15,7 +15,8 @@ module.exports = {
         .setName('message')
         .setDescription('The message to send')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const user = interaction.options.getUser('user');

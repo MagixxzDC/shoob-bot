@@ -22,7 +22,8 @@ module.exports = {
         .setName('user')
         .setDescription('User to roast (optional)')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const target = interaction.options.getUser('user') || interaction.user;

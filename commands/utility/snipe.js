@@ -3,7 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('snipe')
-    .setDescription('Show the last deleted message in this channel'),
+    .setDescription('Show the last deleted message in this channel')
+    .setDMPermission(true),
 
   async execute(interaction) {
     const sniped = interaction.client.snipedMessages.get(interaction.channel.id);

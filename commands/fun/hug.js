@@ -17,7 +17,8 @@ module.exports = {
         .setName('user')
         .setDescription('User to hug')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const target = interaction.options.getUser('user');

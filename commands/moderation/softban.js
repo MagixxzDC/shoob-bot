@@ -15,9 +15,14 @@ module.exports = {
         .setName('reason')
         .setDescription('Reason for softban')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
+    if (!interaction.guild) {
+      return interaction.reply({ content: 'This command can only be used inside a server.', ephemeral: true });
+    }
+
     if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers)) {
       const embed = new EmbedBuilder()
         .setColor('#141414')

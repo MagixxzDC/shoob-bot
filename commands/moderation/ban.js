@@ -24,13 +24,13 @@ module.exports = {
         .setMaxValue(7)
         .setRequired(false)
     )
-    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+    .setDMPermission(true),
 
   async execute(interaction) {
     if (!interaction.guild) {
       return interaction.reply({
         content: '❌ This command can only be used inside a server.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 
@@ -42,7 +42,7 @@ module.exports = {
     if (member && !member.bannable) {
       return interaction.reply({
         content: '❌ I cannot ban this user (insufficient permissions or user has higher role).',
-        flags: 64,
+        ephemeral: true,
       });
     }
 

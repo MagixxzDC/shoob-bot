@@ -16,13 +16,13 @@ module.exports = {
         .setDescription('Reason for the kick')
         .setRequired(false)
     )
-    .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
+    .setDMPermission(true),
 
   async execute(interaction) {
     if (!interaction.guild) {
       return interaction.reply({
         content: '❌ This command can only be used inside a server.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 
@@ -33,14 +33,14 @@ module.exports = {
     if (!member) {
       return interaction.reply({
         content: '❌ User not found in this server.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 
     if (!member.kickable) {
       return interaction.reply({
         content: '❌ I cannot kick this user (insufficient permissions or user has higher role).',
-        flags: 64,
+        ephemeral: true,
       });
     }
 

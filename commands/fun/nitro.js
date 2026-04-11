@@ -3,7 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('nitro')
-    .setDescription('Generate a fake Discord Nitro gift'),
+    .setDescription('Generate a fake Discord Nitro gift')
+    .setDMPermission(true),
 
   async execute(interaction) {
     const codes = [

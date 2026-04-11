@@ -16,7 +16,7 @@ module.exports = {
         .setDescription('Role to give')
         .setRequired(true)
     )
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
+    .setDMPermission(true),
 
   async execute(interaction) {
     if (!interaction.guild) {
@@ -27,7 +27,7 @@ module.exports = {
             .setTitle('❌ Server Only Command')
             .setDescription('This command can only be used inside a server.')
         ],
-        flags: 64,
+        ephemeral: true,
       });
     }
 
@@ -38,21 +38,21 @@ module.exports = {
     if (!member) {
       return interaction.reply({
         content: '❌ User not found in this server.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 
     if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageRoles)) {
       return interaction.reply({
         content: '❌ I do not have permission to manage roles.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 
     if (member.roles.cache.has(role.id)) {
       return interaction.reply({
         content: '❌ That user already has this role.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 

@@ -3,7 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('joke')
-    .setDescription('Tell a random joke'),
+    .setDescription('Tell a random joke')
+    .setDMPermission(true),
 
   async execute(interaction) {
     const jokes = [

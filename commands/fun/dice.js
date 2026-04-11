@@ -11,7 +11,8 @@ module.exports = {
         .setMinValue(2)
         .setMaxValue(100)
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const sides = interaction.options.getInteger('sides') || 6;

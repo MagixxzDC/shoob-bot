@@ -9,7 +9,8 @@ module.exports = {
         .setName('location')
         .setDescription('Location to check weather for')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const location = interaction.options.getString('location');

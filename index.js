@@ -67,6 +67,10 @@ function loadCommands(dir, isSlash) {
       }
 
       if (isSlash) {
+        if (typeof cmd.data.setDMPermission === 'function') {
+          cmd.data.setDMPermission(true);
+        }
+
         client.commands.set(cmd.data.name, cmd);
 
         const data =
@@ -120,20 +124,27 @@ client.once('ready', async () => {
 
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
+  const appId = process.env.CLIENT_ID || client.user.id;
+  const globalSlashCommands = slashCommandsArray.map((command) => ({
+    ...command,
+    integration_types: [0, 1],
+    contexts: [0, 1, 2],
+  }));
+
   try {
-    if (process.env.DISCORD_GUILD_ID) {
+    if (process.env.GUILD_ID) {
       await rest.put(
-        Routes.applicationGuildCommands(client.user.id, process.env.DISCORD_GUILD_ID),
+        Routes.applicationGuildCommands(appId, process.env.GUILD_ID),
         { body: slashCommandsArray }
       );
       console.log('Slash commands registered (guild).');
-    } else {
-      await rest.put(
-        Routes.applicationCommands(client.user.id),
-        { body: slashCommandsArray }
-      );
-      console.log('Slash commands registered (global).');
     }
+
+    await rest.put(
+      Routes.applicationCommands(appId),
+      { body: globalSlashCommands }
+    );
+    console.log('Slash commands registered (global, DM/group chat enabled).');
   } catch (err) {
     console.error('Slash register error:', err);
   }

@@ -9,7 +9,8 @@ module.exports = {
         .setName('user')
         .setDescription('User to compliment')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const user = interaction.options.getUser('user');

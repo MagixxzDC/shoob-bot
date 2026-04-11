@@ -33,7 +33,8 @@ module.exports = {
         .setName('option4')
         .setDescription('Fourth option (optional)')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const question = interaction.options.getString('question');

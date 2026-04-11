@@ -9,7 +9,8 @@ module.exports = {
         .setName('options')
         .setDescription('Options separated by commas (e.g., "pizza, burger, tacos")')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const optionsString = interaction.options.getString('options');
@@ -18,7 +19,7 @@ module.exports = {
     if (options.length < 2) {
       return interaction.reply({
         content: '❌ Please provide at least 2 options separated by commas.',
-        flags: 64,
+        ephemeral: true,
       });
     }
 

@@ -9,7 +9,8 @@ module.exports = {
         .setName('user')
         .setDescription('User to get info about')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') || interaction.user;

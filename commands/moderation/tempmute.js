@@ -22,9 +22,14 @@ module.exports = {
         .setName('reason')
         .setDescription('Reason for tempmute')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
+    if (!interaction.guild) {
+      return interaction.reply({ content: 'This command can only be used inside a server.', ephemeral: true });
+    }
+
     if (!interaction.member.permissions.has(PermissionFlagsBits.ModerateMembers)) {
       const embed = new EmbedBuilder()
         .setColor('#141414')

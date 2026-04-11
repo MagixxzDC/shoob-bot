@@ -3,7 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('serverinfo')
-    .setDescription('Get information about the server'),
+    .setDescription('Get information about the server')
+    .setDMPermission(true),
 
   async execute(interaction) {
     if (!interaction.guild) {
@@ -14,7 +15,7 @@ module.exports = {
             .setTitle('❌ Server Only Command')
             .setDescription('This command can only be used inside a server.')
         ],
-        flags: 64,
+        ephemeral: true,
       });
     }
 

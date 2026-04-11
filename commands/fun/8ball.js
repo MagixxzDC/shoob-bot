@@ -9,7 +9,8 @@ module.exports = {
         .setName('question')
         .setDescription('Your question')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const responses = [

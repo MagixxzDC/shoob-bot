@@ -10,7 +10,8 @@ module.exports = {
         .setName('user')
         .setDescription('User to check warnings for')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction, client) {
     try {

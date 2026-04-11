@@ -1,4 +1,5 @@
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js');
+const { getWarnings } = require('../../utils/moderationLogs');
 
 module.exports = {
   name: 'warnings',
@@ -21,36 +22,42 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor('#141414')
         .setTitle('❌ Missing Arguments')
-        .setDescription('Please mention a user to check warnings for.\nUsage: `-warnings <user>`');
+        .setDescription('Please mention a user or provide a user ID to check warnings for.\nUsage: `-warnings <user>`');
 
       return message.reply({ embeds: [embed] });
     }
 
-    const user = message.mentions.users.first();
+    let user = message.mentions.users.first();
+
+    if (!user) {
+      const userId = args[0].replace(/[^0-9]/g, '');
+      if (userId) {
+        user = await message.client.users.fetch(userId).catch(() => null);
+      }
+    }
+
     if (!user) {
       const embed = new EmbedBuilder()
         .setColor('#141414')
         .setTitle('❌ Invalid User')
-        .setDescription('Please mention a valid user.');
+        .setDescription('Please mention a valid user or provide a user ID.');
 
       return message.reply({ embeds: [embed] });
     }
 
-    const member = message.guild.members.cache.get(user.id);
-    if (!member) {
-      const embed = new EmbedBuilder()
-        .setColor('#141414')
-        .setTitle('❌ User Not Found')
-        .setDescription('That user is not in this server.');
-
-      return message.reply({ embeds: [embed] });
-    }
+    const warnings = getWarnings(message.guild.id, user.id) || [];
+    const description = warnings.length
+      ? warnings
+          .slice(-10)
+          .map((warning, index) => `**${index + 1}.** ${warning.reason || 'No reason provided'} - <@${warning.moderatorId}>`)
+          .join('\n')
+      : 'No warnings found.';
 
     const embed = new EmbedBuilder()
       .setColor('#141414')
       .setTitle(`⚠️ Warnings for ${user.tag}`)
-      .setDescription('This is a demo. In a real bot, warnings would be stored in a database.\n\n**Current Warnings:** 0')
-      .setFooter({ text: 'Warning System' })
+      .setDescription(description)
+      .setFooter({ text: `Total warnings: ${warnings.length}` })
       .setTimestamp();
 
     await message.reply({ embeds: [embed] });

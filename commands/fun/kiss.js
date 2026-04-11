@@ -15,7 +15,8 @@ module.exports = {
         .setName('user')
         .setDescription('User to kiss')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const target = interaction.options.getUser('user');

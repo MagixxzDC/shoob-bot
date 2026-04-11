@@ -9,7 +9,8 @@ module.exports = {
         .setName('expression')
         .setDescription('Math expression to calculate')
         .setRequired(true)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const expression = interaction.options.getString('expression');

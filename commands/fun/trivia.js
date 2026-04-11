@@ -23,7 +23,8 @@ const triviaQuestions = [
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('trivia')
-    .setDescription('Play a trivia game'),
+    .setDescription('Play a trivia game')
+    .setDMPermission(true),
 
   async execute(interaction) {
     const question = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];

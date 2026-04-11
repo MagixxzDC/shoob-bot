@@ -30,7 +30,8 @@ module.exports = {
             .setDescription('Filter warnings by user')
             .setRequired(false)
         )
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     if (!interaction.guild) {
@@ -41,7 +42,7 @@ module.exports = {
             .setTitle('❌ Server Only Command')
             .setDescription('This command can only be used inside a server.')
         ],
-        flags: 64,
+        ephemeral: true,
       });
     }
 
@@ -55,7 +56,7 @@ module.exports = {
             .setTitle('❌ Insufficient Permissions')
             .setDescription('You need moderation permissions to view moderation logs.')
         ],
-        flags: 64,
+        ephemeral: true,
       });
     }
 
@@ -114,7 +115,7 @@ Ends: <t:${Math.floor(member.communicationDisabledUntilTimestamp / 1000)}:R>`,
               .setTitle('❌ Missing Permission')
               .setDescription('The bot needs the View Audit Log permission to show kick logs.')
           ],
-          flags: 64,
+          ephemeral: true,
         });
       }
 

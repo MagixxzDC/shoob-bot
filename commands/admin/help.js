@@ -15,7 +15,8 @@ module.exports = {
           { name: 'Utility', value: 'utility' },
           { name: 'Admin', value: 'admin' }
         )
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const category = interaction.options.getString('category');

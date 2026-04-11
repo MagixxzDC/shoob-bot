@@ -9,7 +9,8 @@ module.exports = {
         .setName('channel')
         .setDescription('Channel to get info about')
         .setRequired(false)
-    ),
+    )
+    .setDMPermission(true),
 
   async execute(interaction) {
     const channel = interaction.options.getChannel('channel') || interaction.channel;
